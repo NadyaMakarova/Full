@@ -1,0 +1,415 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Full.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+        x:Class="Full.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+		xmlns:ScottPlot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
+		Width="1200"
+        Title="Курсовая работа">
+	<Window.Styles>
+		<StyleInclude Source="avares://SukiUI/Theme/Index.xaml"/>
+	</Window.Styles>
+	<!--<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>-->
+	<ScrollViewer>
+		<suki:SideMenu Name="side">
+			<suki:SideMenu.DataContext>
+				<suki:SideMenuModel>
+					<suki:SideMenuModel.HeaderContent>
+						<StackPanel Height="50">
+							<TextBlock Text=""
+									   HorizontalAlignment="Center"
+									   FontSize="14"
+									   VerticalAlignment="Top"
+									   Classes="general">
+							</TextBlock>
+						</StackPanel>
+					</suki:SideMenuModel.HeaderContent>
+					<suki:SideMenuModel.MenuItems>
+						<suki:SideMenuItem Header="Модуль 1">
+							<suki:SideMenuItem.Content>
+								<Grid Name="Lr1">
+									<ScrollViewer>
+										<StackPanel Orientation="Vertical"  Spacing="10" HorizontalAlignment="Stretch">
+											<DockPanel HorizontalAlignment="Center">
+												<TextBlock Text="Задать различное количество типов операций r:"
+														   HorizontalAlignment="Left"
+														   FontSize="20"
+														   VerticalAlignment="Center">
+												</TextBlock>
+												<TextBox Text="{Binding R}" MaxHeight="5" IsEnabled="True"></TextBox>
+											</DockPanel>
+											<TreeView Name="tree" Items="{Binding TypeOperations}" HorizontalAlignment="Center">
+												<TreeView.DataTemplates>
+													<DataTemplate>
+														<!--<ScrollViewer>-->
+														<StackPanel Spacing="10" Orientation="Horizontal">
+															<TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+															<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																<TextBlock Text="Ввести T:" VerticalAlignment="Center"></TextBlock>
+																<TextBox Text="{Binding T}" MaxHeight="5"></TextBox>
+															</StackPanel>
+															<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																<TextBlock Text="Ввести N:" VerticalAlignment="Center"></TextBlock>
+																<TextBox Text="{Binding N}" MaxHeight="5"></TextBox>
+															</StackPanel>
+															<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																<TextBlock Text="Ввести k:" VerticalAlignment="Center"></TextBlock>
+																<TextBox Text="{Binding k}" MaxHeight="5"></TextBox>
+															</StackPanel>
+															<StackPanel Name="stackPanel"  Orientation="Horizontal" HorizontalAlignment="Right">
+																<TextBlock Text="Ввести λ:" VerticalAlignment="Center"></TextBlock>
+																<ComboBox SelectedIndex="{Binding SelectedIndex}" Name="comboBox" SelectionChanged="SelectionChanged">
+																	<ComboBoxItem>
+																		<ComboBoxItem.Content>
+																			<TextBlock Text="0,0001"></TextBlock>
+																		</ComboBoxItem.Content>
+																	</ComboBoxItem>
+																	<ComboBoxItem>
+																		<ComboBoxItem.Content>
+																			<TextBlock Text="0,001"></TextBlock>
+																		</ComboBoxItem.Content>
+																	</ComboBoxItem>
+																	<ComboBoxItem>
+																		<ComboBoxItem.Content>
+																			<TextBlock Text="0,003"></TextBlock>
+																		</ComboBoxItem.Content>
+																	</ComboBoxItem>
+																	<ComboBoxItem>
+																		<ComboBoxItem.Content>
+																			<TextBlock Text="0,03"></TextBlock>
+																		</ComboBoxItem.Content>
+																	</ComboBoxItem>
+																	<ComboBoxItem>
+																		<ComboBoxItem.Content>
+																			<TextBlock Text="0,2"></TextBlock>
+																		</ComboBoxItem.Content>
+																	</ComboBoxItem>
+																	<ComboBoxItem>
+																		<ComboBoxItem.Content>
+																			<TextBlock Text="0,3"></TextBlock>
+																		</ComboBoxItem.Content>
+																	</ComboBoxItem>
+																	<ComboBoxItem>
+																		<ComboBoxItem.Content>
+																			<TextBlock Text="0,01"></TextBlock>
+																		</ComboBoxItem.Content>
+																	</ComboBoxItem>
+																	<ComboBoxItem>
+																		<ComboBoxItem.Content>
+																			<TextBlock Text="0,1"></TextBlock>
+																		</ComboBoxItem.Content>
+																	</ComboBoxItem>
+																</ComboBox>
+															</StackPanel>
+															<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																<TextBlock Text="Расчет n:" VerticalAlignment="Center"></TextBlock>
+																<TextBox Text="{Binding n}" MaxHeight="5" IsReadOnly="True"></TextBox>
+															</StackPanel>
+															<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																<TextBlock Text="Расчет P:" VerticalAlignment="Center"></TextBlock>
+																<TextBox Text="{Binding P}" MaxHeight="5" IsReadOnly="True"></TextBox>
+															</StackPanel>
+														</StackPanel>
+														<!--</ScrollViewer>-->
+													</DataTemplate>
+												</TreeView.DataTemplates>
+											</TreeView>
+											<StackPanel Spacing="10" Orientation="Horizontal" HorizontalAlignment="Center">
+												<StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+													<TextBlock Text="Ввести Pк:" VerticalAlignment="Center"></TextBlock>
+													<TextBox Text="{Binding Pk}" MaxHeight="5"></TextBox>
+												</StackPanel>
+												<StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+													<TextBlock Text="Ввести Pоб:" VerticalAlignment="Center"></TextBlock>
+													<TextBox Text="{Binding Pob}" MaxHeight="5"></TextBox>
+												</StackPanel>
+												<StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+													<TextBlock Text="Ввести Pи:" VerticalAlignment="Center"></TextBlock>
+													<TextBox Text="{Binding Pi}" MaxHeight="5"></TextBox>
+												</StackPanel>
+											</StackPanel>
+											<StackPanel Spacing="10" Orientation="Horizontal" HorizontalAlignment="Center">
+												<StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+													<TextBlock Text="Расчет Pоп:" VerticalAlignment="Center"></TextBlock>
+													<TextBox Text="{Binding Pop}" MaxHeight="5" IsReadOnly="True"></TextBox>
+												</StackPanel>
+												<StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+													<TextBlock Text="Расчет Pисп:" VerticalAlignment="Center"></TextBlock>
+													<TextBox Text="{Binding Pisp}" MaxHeight="5" IsReadOnly="True"></TextBox>
+												</StackPanel>
+												<StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+													<TextBlock Text="Расчет Pд:" VerticalAlignment="Center"></TextBlock>
+													<TextBox Text="{Binding Pd}" MaxHeight="5" IsReadOnly="True"></TextBox>
+												</StackPanel>
+											</StackPanel>
+											<StackPanel Spacing="10" Orientation="Horizontal" HorizontalAlignment="Center">
+												<Button Content="Рассчитать" Command="{Binding CalculationCommand}"></Button>
+												<Button Content="Загрузить"  Click="Export_Clicked"></Button>
+												<Button Content="Сохранить в БД" Command="{Binding SaveDatabaseCommand}"></Button>
+												<Button Content="Выгрузить" Command="{Binding DownloadCommand}"></Button>
+											</StackPanel>
+										</StackPanel>
+									</ScrollViewer>
+								</Grid>
+							</suki:SideMenuItem.Content>
+						</suki:SideMenuItem>
+						<suki:SideMenuItem Header="Модуль 2">
+							<suki:SideMenuItem.Content>
+								<Grid Name="Lr2">
+									<ScrollViewer>
+										<StackPanel Orientation="Vertical"  Spacing="10" HorizontalAlignment="Stretch">
+											<DockPanel HorizontalAlignment="Center">
+												<TextBlock Text="Добавить элемент:"
+														   HorizontalAlignment="Left"
+														   FontSize="20"
+														   VerticalAlignment="Center">
+												</TextBlock>
+												<ComboBox Name="comboBox">
+													<ComboBoxItem>
+														<ComboBoxItem.Content>
+															<TextBlock Text="1 элемент"></TextBlock>
+														</ComboBoxItem.Content>
+													</ComboBoxItem>
+													<ComboBoxItem>
+														<ComboBoxItem.Content>
+															<TextBlock Text="2 элемент"></TextBlock>
+														</ComboBoxItem.Content>
+													</ComboBoxItem>
+													<ComboBoxItem>
+														<ComboBoxItem.Content>
+															<TextBlock Text="3 элемент"></TextBlock>
+														</ComboBoxItem.Content>
+													</ComboBoxItem>
+													<ComboBoxItem>
+														<ComboBoxItem.Content>
+															<TextBlock Text="4 элемент"></TextBlock>
+														</ComboBoxItem.Content>
+													</ComboBoxItem>
+												</ComboBox>
+											</DockPanel>
+											<DockPanel HorizontalAlignment="Center">
+												<TextBlock Text="Ввести Pтр:"
+																		   HorizontalAlignment="Left"
+																		   FontSize="20"
+																		   VerticalAlignment="Center">
+												</TextBlock>
+												<TextBox Text="{Binding Ptr}" MaxHeight="5" IsEnabled="True"></TextBox>
+											</DockPanel>
+											<DockPanel HorizontalAlignment="Center" Name="imageDock">
+												<Image Name="image1" Source="/Assets/1.JPG" Width="200" IsVisible="False"></Image>
+												<Image Name="image2" Source="/Assets/2.JPG" Width="200" IsVisible="False"></Image>
+												<Image Name="image3" Source="/Assets/3.JPG" Width="200" IsVisible="False"></Image>
+												<Image Name="image4" Source="/Assets/4.JPG" Width="200" IsVisible="False"></Image>
+											</DockPanel>
+											<TreeView Name="treeLr2" HorizontalAlignment="Center">
+												<TreeView.DataTemplates>
+													<DataTemplate>
+														<ScrollViewer>
+															<StackPanel Spacing="10" Orientation="Horizontal">
+																<TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+																<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																	<TextBlock Text="Ввести дату:" VerticalAlignment="Center"></TextBlock>
+																	<TextBox IsReadOnly="False" Text="{Binding Date}" MaxHeight="5" DoubleTapped="Date_Clicked"></TextBox>
+																</StackPanel>
+																<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																	<TextBlock Text="Ввести T:" VerticalAlignment="Center"></TextBlock>
+																	<TextBox Text="{Binding T}" MaxHeight="5"></TextBox>
+																</StackPanel>
+																<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																	<TextBlock Text="Рассчет λ:" VerticalAlignment="Center"></TextBlock>
+																	<TextBox Text="{Binding Lyambda}" MaxHeight="5"></TextBox>
+																</StackPanel>
+																<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																	<TextBlock Text="Расчет P:" VerticalAlignment="Center"></TextBlock>
+																	<TextBox Text="{Binding P}" MaxHeight="5" IsReadOnly="True"></TextBox>
+																</StackPanel>
+																<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																	<TextBlock Text="Расчет времени:" VerticalAlignment="Center"></TextBlock>
+																	<TextBox Text="{Binding Time}" MaxHeight="5" IsReadOnly="True"></TextBox>
+																</StackPanel>
+																<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																	<TextBlock Text="Расчет даты:" VerticalAlignment="Center"></TextBlock>
+																	<TextBox Text="{Binding DateEnd}" MaxHeight="5" IsReadOnly="True"></TextBox>
+																</StackPanel>
+															</StackPanel>
+														</ScrollViewer>
+													</DataTemplate>
+												</TreeView.DataTemplates>
+											</TreeView>
+											<StackPanel Spacing="10" Orientation="Horizontal" HorizontalAlignment="Center">
+												<!--<Button Content="Рассчитать" Command="{Binding CalculationCommand}"></Button>
+				<Button Content="Загрузить" Click="Download_Clicked"></Button>
+				<Button Content="Выгрузить" Click="Export_Clicked"></Button>-->
+												<Button Content="Добавить" Click="Add_Clicked"></Button>
+												<Button Content="Рассчитать" Command="{Binding CalculationCommand}"></Button>
+												<Button Content="Сохранить в Бд" Command="{Binding SaveCommand}"></Button>
+											</StackPanel>
+											<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+												<TextBlock Text="Ввод количества лет:"
+																		   HorizontalAlignment="Left"
+																		   FontSize="20"
+																		   VerticalAlignment="Center"/>
+												<TextBox Name="yearText" IsReadOnly="False" MaxHeight="5"></TextBox>
+												<Button Content="Построить график" Click="Years_Clicked"></Button>
+											</StackPanel>
+											<ScottPlot:AvaPlot Name="AvaPlot2" Width="400" Height="400"></ScottPlot:AvaPlot>
+										</StackPanel>
+									</ScrollViewer>
+								</Grid>
+							</suki:SideMenuItem.Content>
+						</suki:SideMenuItem>
+						<suki:SideMenuItem Header="Модуль 3">
+							<suki:SideMenuItem.Content>
+								<Grid Name="Lr3">
+									<ScrollViewer>
+										<StackPanel Orientation="Vertical"  Spacing="10" HorizontalAlignment="Stretch">
+											<DockPanel HorizontalAlignment="Center">
+												<TextBlock Text="Ввести количество элементов:"
+																		   HorizontalAlignment="Left"
+																		   FontSize="20"
+																		   VerticalAlignment="Center">
+												</TextBlock>
+												<TextBox Text="{Binding Y}" MaxHeight="5" IsEnabled="True"></TextBox>
+											</DockPanel>
+											<DockPanel HorizontalAlignment="Center">
+												<TextBlock Text="Ввести количество периодов:"
+																		   HorizontalAlignment="Left"
+																		   FontSize="20"
+																		   VerticalAlignment="Center">
+												</TextBlock>
+												<TextBox Text="{Binding N}" MaxHeight="5" IsEnabled="True"></TextBox>
+											</DockPanel>
+											<TreeView HorizontalAlignment="Center" Items="{Binding Periods}">
+												<TreeView.DataTemplates>
+													<DataTemplate>
+														<ScrollViewer>
+															<StackPanel Spacing="5" Orientation="Horizontal">
+																<TextBlock Text="{Binding Number}" VerticalAlignment="Center"/>
+																<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																	<TextBlock Text="Ввод промежутка времени:" VerticalAlignment="Center"></TextBlock>
+																	<TextBox Text="{Binding Time}" MaxHeight="5"></TextBox>
+																</StackPanel>
+																<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																	<TextBlock Text="Ввод количества отказанных элементов:" VerticalAlignment="Center"></TextBlock>
+																	<TextBox Text="{Binding D}" MaxHeight="5"></TextBox>
+																</StackPanel>
+																<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																	<TextBlock Text="Вывод доверительного интервала:" VerticalAlignment="Center"></TextBlock>
+																	<TextBox Text="{Binding Sigma}" MaxHeight="5" IsReadOnly="True"></TextBox>
+																</StackPanel>
+																<StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+																	<TextBlock Text="Вывод выживаемости:" VerticalAlignment="Center"></TextBlock>
+																	<TextBox Text="{Binding S}" MaxHeight="5" IsReadOnly="True"></TextBox>
+																</StackPanel>
+															</StackPanel>
+														</ScrollViewer>
+													</DataTemplate>
+												</TreeView.DataTemplates>
+											</TreeView>
+											<StackPanel Spacing="10" Orientation="Horizontal" HorizontalAlignment="Center">
+												<Button Content="Рассчитать" Click="Clicked_plot"></Button>
+												<Button Content="Загрузить" Command="{Binding SaveCommand}"></Button>
+												<Button Content="Сохранить в БД" Command="{Binding SaveDatabaseCommand}"/>
+												<Button Content="Выгрузить" Command="{Binding ExportCommand}"></Button>
+											</StackPanel>
+											<ScottPlot:AvaPlot Name="AvaPlot1" Width="400" Height="400"></ScottPlot:AvaPlot>
+										</StackPanel>
+									</ScrollViewer>
+								</Grid>
+							</suki:SideMenuItem.Content>
+						</suki:SideMenuItem>
+						<suki:SideMenuItem Header="Модель Миллса">
+							<suki:SideMenuItem.Content>
+								<StackPanel Name="mills" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" Spacing="10">
+									<TextBlock HorizontalAlignment="Center" Text="Модель Миллса"></TextBlock>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center" Text="Количество искусственно внесенных ошибок:"></TextBlock>
+										<TextBox Name="S" Text="{Binding S}"></TextBox>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center" Text="Число обнаруженных искусственных ошибок:"></TextBlock>
+										<TextBox Name="V" Text="{Binding V}"></TextBox>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center" Text="Предполагаемое количество ошибок в программе:"></TextBlock>
+										<TextBox Name="K" Text="{Binding K}"></TextBox>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center" Text="Доверительный уровень прогноза:"></TextBlock>
+										<TextBox IsReadOnly="True" Name="P" Text="{Binding P}"></TextBox>
+									</StackPanel>
+									<Button HorizontalAlignment="Center" Content="Рассчитать" Name="millsCalculation" Command="{Binding MillsCommand}"></Button>
+									<Button HorizontalAlignment="Center" Content="Загрузить" Command="{Binding SaveMillsCommand}"></Button>
+									<Button HorizontalAlignment="Center" Content="Сохранить в БД" Command="{Binding SaveDataBaseMillsCommand}"/>
+									<Button HorizontalAlignment="Center" Content="Выгрузить" Command="{Binding ExportMillsCommand}"></Button>
+								</StackPanel>
+							</suki:SideMenuItem.Content>
+						</suki:SideMenuItem>
+						<suki:SideMenuItem Header="Модель Гоело-Окумото">
+							<suki:SideMenuItem.Content>
+								<StackPanel Name="okumoto" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" Spacing="10">
+									<TextBlock HorizontalAlignment="Center" Text="Модель Гоело-Окумото"></TextBlock>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center" Text="Число обнаруженных отказов за время тестирования:"></TextBlock>
+										<TextBox Name="M" Text="{Binding M}"></TextBox>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center" Text="Продолжительность тестирования:"></TextBlock>
+										<TextBox Name="T" Text="{Binding T}"></TextBox>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center" Text="Оценка числа ошибок в ПО в начале тестирования:"></TextBlock>
+										<TextBox Name="N" Text="{Binding N}"></TextBox>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center" Text="Число ошибочных экспериментов:"></TextBlock>
+										<TextBox Name="Nex" Text="{Binding Nex}"></TextBox>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center" Text="Интенсивность обнаружения отказов:"></TextBlock>
+										<TextBox Name="B" Text="{Binding B}" IsReadOnly="True"></TextBox>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock VerticalAlignment="Center" Text="Вероятность безотказной работы:"></TextBlock>
+										<TextBox Name="Pg" Text="{Binding Pg}" IsReadOnly="True"></TextBox>
+									</StackPanel>
+									<TreeView Name="periods" Items="{Binding Periods}">
+										<TreeView.DataTemplates>
+											<DataTemplate>
+												<StackPanel Orientation="Horizontal" Spacing="10">
+													<StackPanel Orientation="Horizontal">
+														<TextBlock VerticalAlignment="Center" Text="Период:"></TextBlock>
+														<TextBox Text="{Binding T}" IsReadOnly="True"></TextBox>
+													</StackPanel>
+													<StackPanel Orientation="Horizontal">
+														<TextBlock VerticalAlignment="Center" Text="λ:"></TextBlock>
+														<TextBox IsReadOnly="True" Text="{Binding Lyambda}"></TextBox>
+													</StackPanel>
+												</StackPanel>
+											</DataTemplate>
+										</TreeView.DataTemplates>
+									</TreeView>
+									<Button HorizontalAlignment="Center" Content="Рассчитать" Name="goeloCalculation" Command="{Binding GoeloCommand}"></Button>
+									<StackPanel Orientation="Horizontal">
+										<Button HorizontalAlignment="Center" Content="Построить график" Click="Clicked"></Button>
+										<Button HorizontalAlignment="Center" Content="Загрузить" Command="{Binding SaveOkumotoCommand}"></Button>
+										<Button HorizontalAlignment="Center" Content="Сохранить в БД" Command="{Binding SaveDataBaseOkumotoCommand}"/>
+										<Button HorizontalAlignment="Center" Content="Выгрузить" Command="{Binding ExportOkumotoCommand}"></Button>
+									</StackPanel>
+									<ScottPlot:AvaPlot Name="avaPlot1" Width="400" Height="400"></ScottPlot:AvaPlot>
+								</StackPanel>
+							</suki:SideMenuItem.Content>
+						</suki:SideMenuItem>
+					</suki:SideMenuModel.MenuItems>
+				</suki:SideMenuModel>
+			</suki:SideMenu.DataContext>
+		</suki:SideMenu>
+	</ScrollViewer>
+
+</Window>
